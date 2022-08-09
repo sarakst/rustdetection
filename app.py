@@ -20,7 +20,7 @@ map_dict = {0: 'Class A',
             1: 'Class B',
             2: 'Class C',
             3: 'Class D'}
-file = st.file_uploader("Upload the image to be classified \U0001F447", type=["jpg", "png"])
+file = st.file_uploader("Upload the image to be classified:", type=["jpg", "png","jpeg"])
 import cv2
 from PIL import Image, ImageOps
 import numpy as np
@@ -43,6 +43,8 @@ if file is None:
     st.text("Please upload an image file")
 else:
     image = Image.open(file)
-    st.image(image, use_column_width=True)
-    predictions = upload_predict(image, model)
-    st.title("Predicted Label for the image is {}".format(map_dict [predictions]))
+    st.image(image, channels="RGB")
+    Genrate_pred = st.button("Generate Prediction")
+    if Genrate_pred:
+        predictions = upload_predict(image, model)
+        st.title("Predicted Label for the image is {}".format(map_dict [predictions]))
